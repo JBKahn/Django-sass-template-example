@@ -30,14 +30,6 @@ module.exports = function(grunt) {
             }
         },
 
-        connect: {
-            server: {
-                options: {
-                    port: "9001"
-                }
-            }
-        },
-
         watch: {
             dev: {
                 files: [
@@ -59,11 +51,10 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-sass');
-    grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
 
     grunt.registerTask('default', ['sass', 'concat', 'copy']);
-    grunt.registerTask('dev', ['default', 'connect', 'watch']);
+    grunt.registerTask('dev', ['default', 'watch']);
 
 };
