@@ -90,7 +90,19 @@ Setup
 0. Install [Heroku CLI](https://toolbelt.heroku.com/)
 1. `pip install django-toolbelt`
 2. `heroku create`
-3. `git push heroku master`
+3. Heroku will automatically catch the node modules file and think it's a node app. We have to let it know otherwise:
+
+    `heroku config:set BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-python`
+
+4. `git push heroku master`
+5. Setup database
+
+    `heroku addons:add heroku-postgresql`
+
+6. Run Django's syncdb
+
+    `heroku run python manage.py syncdb`
+
 
 Deploy
 ------
