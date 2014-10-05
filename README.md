@@ -90,6 +90,14 @@ installation
 1. Place the following in project_directory/.git/hooks/pre-commit
 2. Make the file executable
 
+Requirements
+------------
+```
+flake8==2.2.1
+flake8-print
+flake8-debugger
+```
+
 pre-commit
 ----------
 
@@ -116,7 +124,7 @@ if [ -n "$PYTHON_FILES" ]; then
     has_flake8_debugger=$(flake8 --version | grep flake8-debugger | wc -l)
 
     if [ -z "$flake8" ] || [ $has_flake8_print -lt 1 ] || [ $has_flake8_debugger -lt 1 ]; then
-        printf "\033[31mYou must install flake8 to check for python violations; sudo pip install flake8; sudo pip install flake8-print; sudo pip install flake8-debugger;\n\033[0m"
+        printf "\033[31mYou must install flake8 to check for python violations; sudo pip install flake8==2.2.1; sudo pip install flake8-print; sudo pip install flake8-debugger;\n\033[0m"
         RETVAL=1
     else
         printf "\033[32mChecking python files for flake8 violations\n\033[0m"
