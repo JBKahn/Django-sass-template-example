@@ -90,8 +90,8 @@ installation
 1. Place the following in project_directory/.git/hooks/pre-commit
 2. Make the file executable
 
-Requirements
-------------
+Pip Installable Requirements
+----------------------------
 ```
 flake8==2.2.1
 flake8-print
