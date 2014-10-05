@@ -68,6 +68,11 @@ Navigate to the website
 
     It's located at `http://localhost:8000/`
 
+Default Admin User
+------------------
+
+Username and password are `admin`
+
 Requirements
 ------------
 
