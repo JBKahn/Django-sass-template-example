@@ -84,50 +84,103 @@ Running The Tests
 Pre-Commit Hook
 ===============
 
-Place this in project_directory/.git/hooks/pre-commit (make sure it's executable)
-```bash
-#!/bin/bash
+installation
+------------
 
+1. Place the following in project_directory/.git/hooks/pre-commit
+2. Make the file executable
+
+pre-commit
+----------
+
+```bash
+#!/bin/sh
+
+# Allows for colors and such
 export TERM=xterm-256color
 
-flake8=$(which flake8)
 
-if [ -z "$flake8" ]; then
-    $echo "You must install flake8; sudo pip install flake8"
-    exit 1
-fi
+FILES="git diff --cached --name-only --diff-filter=ACM"
+ROOT=$(git rev-parse --show-toplevel)
+RETVAL=0
 
-FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -e '\.py$')
+PYTHON_FILES=$($FILES | grep -E ".py$")
+# This is because flake8's --exclude doesn't seem to work properly. Exclude via grep.
+PYTHON_FILES_WITHOUT_MIGRATIONS=$($FILES | grep -E ".py$" | grep -v "migrations/")
+JS_FILES=$($FILES | grep -E ".js$" | grep -v "dist" | grep -v "/build/")
 
-# Check for print statements
-if [ -n "$FILES" ]; then
-    printf "\e[32mChecking files for print violations\n\033[0m"
-    grep -n -E -v "^#" $FILES | grep -E "[^\"']\bprint[\"' ]+"
-fi
+if [ -n "$PYTHON_FILES" ]; then
 
-# Check for ipdb and pdb imports/usage
-if [ -n "$FILES" ]; then
-    printf "\e[32mChecking files for pdb violations\n\033[0m"
-    grep --exclude=\*pre-commit -n -E "import.*i?pdb|i?pdb\." $PYTHON_FILES
-fi
+    flake8=$(which flake8)
+    has_flake8_print=$(flake8 --version | grep flake8-print | wc -l)
+    has_flake8_debugger=$(flake8 --version | grep flake8-debugger | wc -l)
 
-# Auto-check for pep8
-if [ -n "$FILES" ]; then
-    printf "\e[32mChecking Python files for flake8 violations\n\033[0m"
-    flake8 --ignore=E501 $FILES
+    if [ -z "$flake8" ] || [ $has_flake8_print -lt 1 ] || [ $has_flake8_debugger -lt 1 ]; then
+        printf "\033[31mYou must install flake8 to check for python violations; sudo pip install flake8; sudo pip install flake8-print; sudo pip install flake8-debugger;\n\033[0m"
+        RETVAL=1
+    else
+        printf "\033[32mChecking python files for flake8 violations\n\033[0m"
+
+        for file in ${PYTHON_FILES_WITHOUT_MIGRATIONS}; do
+            FLAKE8_ERRORS=$(git show :${file} | flake8 --ignore=E501 - | sed -e 's/^stdin\:/line /g')
+
+            print_allowed=$(echo $file | grep -E "(management/commands|manage.py|/scripts|settings.py)" | wc -l)
+
+            if [ "$print_allowed" -gt 0 ]; then
+                FLAKE8_ERRORS=$(echo "$FLAKE8_ERRORS" | grep -v "print statement")
+            fi
+
+            if [ "$FLAKE8_ERRORS" != "" ]; then
+                printf "\033[33mFlake8 errors detected in $file\n\033[0m"
+                printf "\033[31m$FLAKE8_ERRORS\n\033[0m"
+                RETVAL=1
+            fi
+        done
+    fi
     RETVAL=$?
 fi
 
-# Run nosetests
-nosetests --with-progressive
-PASSED=$?
+if [ -n "$JS_FILES" ]; then
 
-exit $RETVAL && $PASSED
+    jshint=$(which jshint)
+    node=$(which node)
+
+    if [ -z "$jshint" ] || [ -z "$node" ]; then
+        printf "\033[31mYou must install jshint to check for javascript violations; sudo npm install -g jshint\n\033[0m"
+        RETVAL=1
+    else
+        printf "\033[32mChecking javascript files for linting errors\n\033[0m"
+
+        for file in ${JS_FILES}; do
+            result=$(git show :${file} | jshint - | sed -e 's/^stdin\: line/line/g')
+
+            if [ "$result" != "" ]; then
+                printf "\033[33mJSHint errors detected in $file\n\033[0m"
+                printf "\033[31m$result\n\033[0m"
+                RETVAL=1
+            fi
+        done
+    fi
+fi
+
+if [ $RETVAL -eq 0 ]; then
+    printf "\033[32mNo errors found!\n\033[0m"
+fi
+
+exit $RETVAL
 ```
 
 Post-Checkout Hook
 ==================
-Place this in project_directory/.git/hooks/post-checkout (make sure it's executable)
+
+installation
+------------
+
+1. Place the following in project_directory/.git/hooks/post-checkout
+2. Make the file executable
+
+post-checkout
+-------------
 
 ```bash
 #!/bin/bash
