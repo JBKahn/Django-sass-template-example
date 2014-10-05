@@ -87,9 +87,15 @@ How to Deploy using Heroku
 Setup
 -----
 
+0. Install [Heroku CLI](https://toolbelt.heroku.com/)
 1. `pip install django-toolbelt`
 2. `heroku create`
 3. `git push heroku master`
+
+Deploy
+------
+
+`git push heroku master`
 
 View
 ----
