@@ -1,5 +1,7 @@
 import os
 
+from .settings import *
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 

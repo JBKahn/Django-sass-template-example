@@ -61,7 +61,7 @@ Start the app
 -------------
 
     $ workon <project-name>
-    $ python manage.py runserver 8000
+    $ ./run.sh
 
 Navigate to the website
 -----------------------
