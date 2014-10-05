@@ -3,6 +3,8 @@ south==0.8.4
 django-grappelli==2.5.2
 djangorestframework==2.3.12
 django-extensions==1.3.3
-flake8==2.1.0
+flake8==2.2.1
+flake8-print
+flake8-debugger
 nose==1.3.1
 nose-progressive==1.5
