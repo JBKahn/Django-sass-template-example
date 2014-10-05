@@ -17,7 +17,7 @@ Setup
 
 6. Install bower globally.
 
-    `npm install -g bower`
+    `sudo npm install -g bower`
 
 7. Install second set of dependancies using bower
 
@@ -25,7 +25,7 @@ Setup
 
 8. Install grunt for building frontend files
 
-    `npm install -g grunt-cli`
+    `sudo npm install -g grunt-cli`
 
 9. Build frontend files
 

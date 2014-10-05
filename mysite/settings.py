@@ -18,7 +18,6 @@ TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 # Application definition
 
 INSTALLED_APPS = (
-    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -60,9 +59,6 @@ USE_I18N = True
 USE_L10N = False
 
 USE_TZ = True
-
-
-GRAPPELLI_ADMIN_TITLE = 'Flaming Unicorns'
 
 try:
     from .production import *
