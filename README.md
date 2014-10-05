@@ -81,6 +81,21 @@ Running The Tests
 -----------------
 `nosetests --with-progressive`
 
+How to Deploy using Heroku
+==========================
+
+Setup
+-----
+
+1. `pip install django-toolbelt`
+2. `heroku create`
+3. `git push heroku master`
+
+View
+----
+
+`heroku open`
+
 Pre-Commit Hook
 ===============
 
