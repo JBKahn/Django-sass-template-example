@@ -2,44 +2,74 @@ Django Sass Template
 ====================
 
 Setup
-=====
+-----
 
-Install your Ruby dependencies:
-    $ gem install sass
+1. Install Ruby (I use [RVM](http://rvm.io/rvm/install))
+2. Install Sass Ruby gem
 
-Install your JS dependencies with Node:
+    `gem install sass`
 
-    $ npm install
+3. Install [NodeJs](http://nodejs.org/)
+4. Checkout this project and change into the directory.
+5. Install first set of dependencies
 
-Install your front-end libraries with Grunt/Bower:
+    `npm install`
 
-    $ npm install -g bower
+6. Install bower globally.
 
-    $ bower install
+    `npm install -g bower`
 
-    $ npm install -g grunt-cli
+7. Install second set of dependancies using bower
 
-    $ grunt
+    `bower install`
 
-Make python virtual environment
+8. Install grunt for building frontend files
 
-0. Ensure you have both python and pip installed.
-1. `pip install virtualenv`.
-2. `pip install virtualenvwrapper` and [setup required variables](http://virtualenvwrapper.readthedocs.org/en/latest/install.html).
-3. go to the project directory.
-4. `mkvirtualenv website -a (project-directory) -r ./requirements.txt`. (You can use `pip install -r ./requirements.txt` to install the project requirements at any time).
-5. Use `workon website` at any time to get back into the virtual environment.
+    `npm install -g grunt-cli`
+
+9. Build frontend files
+
+    `grunt`
+
+10. Download python (~2.7) if you don't have it.
+11. Download [pip](https://pip.readthedocs.org/en/latest/installing.html)
+12. Download virtualenv
+
+    `pip install virtualenv`
+
+13. Download virtualenvwrapper
+
+    `pip install virtualenvwrapper`
+
+14. Set [required variables](http://virtualenvwrapper.readthedocs.org/en/latest/install.html)
+
+    I have the following in my `$HOME/.bashrc` file:
+    ```sh
+    export WORKON_HOME=$HOME/.virtualenvs
+    export PROJECT_HOME=$HOME/virtualenvProject
+    source /usr/local/bin/virtualenvwrapper.sh
+    ```
+
+15. Setup python virtual environment in the project directory (assuming you're inside it), replace the project name with one of your choice.
+
+    `mkvirtualenv <project-name> -a . -r ./requirements.txt`.
+
+    note: (You can use `pip install -r ./requirements.txt` to install/update the python project requirements at any time).
+
 
 Start the app
+-------------
 
+    $ workon <project-name>
     $ python manage.py runserver 8000
 
 Navigate to the website
+-----------------------
 
     It's located at `http://localhost:8000/`
 
 Requirements
-============
+------------
 
 * python 2.7
 * Ruby and the sass gem
@@ -48,7 +78,7 @@ Requirements
 
 
 Running The Tests
-=================
+-----------------
 `nosetests --with-progressive`
 
 Pre-Commit Hook
