@@ -23,17 +23,17 @@ module.exports = function(grunt) {
                 src: [
                     appConfig.path.bowerPath + 'angular/angular.js',
                     appConfig.path.bowerPath + 'angular-route/angular-route.js',
-                    bowerPath + "jquery/dist/jquery.min.js",
-                    bowerPath + "bootstrap/dist/js/bootstrap.min.js"
+                    appConfig.path.bowerPath + "jquery/dist/jquery.min.js",
+                    appConfig.path.bowerPath + "bootstrap/dist/js/bootstrap.min.js"
                 ],
-                dest: buildPath + "js/requirements.dist.js"
+                dest: appConfig.path.buildPath + "js/requirements.dist.js"
             },
             css: {
                 src: [
-                    bowerPath + "bootstrap/dist/css/bootstrap.min.css",
-                    bowerPath + "font-awesome/css/font-awesome.min.css",
+                    appConfig.path.bowerPath + "bootstrap/dist/css/bootstrap.min.css",
+                    appConfig.path.bowerPath + "font-awesome/css/font-awesome.min.css",
                 ],
-                dest: buildPath + "css/deps.style.dist.css"
+                dest: appConfig.path.buildPath + "css/deps.style.dist.css"
             },
             angularApp: {
                 src: [
@@ -51,14 +51,14 @@ module.exports = function(grunt) {
                     appConfig.path.buildPath + "js/" + appConfig.appName + '.templates.js',
                     appConfig.path.buildPath + "js/" +  appConfig.appName + ".app.js"
                 ],
-                dest: staticPath + '<%= appConfig.appName %>/js/<%= appConfig.appName %>.dist.js'
+                dest: appConfig.path.staticPath + '<%= appConfig.appName %>/js/<%= appConfig.appName %>.dist.js'
             },
             cssDist: {
                 src: [
                   appConfig.path.buildPath + "css/deps.style.dist.css",
                   appConfig.path.buildPath + "css/app.css"
                 ],
-                dest: staticPath + '<%= appConfig.appName %>/css/<%= appConfig.appName %>.dist.css'
+                dest: appConfig.path.staticPath + '<%= appConfig.appName %>/css/<%= appConfig.appName %>.dist.css'
             }
         },
 
@@ -66,11 +66,33 @@ module.exports = function(grunt) {
             main: {
                 files: [
                     // includes files within path
-                    {expand: true, flatten: true, src: [buildPath + "css/app.css.map"], dest: staticPath + '<%= appConfig.appName %>/css/', filter: "isFile"},
-                    {expand: true, flatten: true, src: [bowerPath + "font-awesome/fonts/*"], dest: staticPath + '<%= appConfig.appName %>/fonts/', filter: "isFile"},
-                    {expand: true, flatten: true, src: [bowerPath + "bootstrap/fonts/*"], dest: staticPath + '<%= appConfig.appName %>/fonts/', filter: "isFile"},
-                    {expand: true, flatten: true, src: [bowerPath + "jquery/dist/jquery.min.map"], dest: staticPath + '<%= appConfig.appName %>/js/lib/', filter: "isFile"},
-                    {expand: true, flatten: true, src: [bowerPath + "jquery/dist/jquery.min.js"], dest: staticPath + '<%= appConfig.appName %>/js/lib/', filter: "isFile"},
+                    {
+                        expand: true,
+                        flatten: true,
+                        src: [appConfig.path.buildPath + "css/app.css.map"],
+                        dest: appConfig.path.staticPath + '<%= appConfig.appName %>/css/', filter: "isFile"
+                    }, {
+                        expand: true,
+                        flatten: true,
+                        src: [appConfig.path.bowerPath + "font-awesome/fonts/*"],
+                        dest: appConfig.path.staticPath + '<%= appConfig.appName %>/fonts/', filter: "isFile"
+                    }, {
+                        expand: true,
+                        flatten: true,
+                        src: [appConfig.path.bowerPath + "bootstrap/fonts/*"],
+                        dest: appConfig.path.staticPath + '<%= appConfig.appName %>/fonts/', filter: "isFile"
+                    }, {
+                        expand: true,
+                        flatten: true,
+                        src: [appConfig.path.bowerPath + "jquery/dist/jquery.min.map"],
+                        dest: appConfig.path.staticPath + '<%= appConfig.appName %>/js/lib/', filter: "isFile"
+                    },
+                    {
+                        expand: true,
+                        flatten: true,
+                        src: [appConfig.path.bowerPath + "jquery/dist/jquery.min.js"],
+                        dest: appConfig.path.staticPath + '<%= appConfig.appName %>/js/lib/', filter: "isFile"
+                    },
                 ]
             }
         },
