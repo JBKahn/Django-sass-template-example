@@ -7,7 +7,7 @@ node_modules/
 bower_components/
 
 # Intermediate files used by grunt
-static-src-build/
+build/
 
 # Sass cache
 .sass-cache/

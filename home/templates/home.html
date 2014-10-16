@@ -1,0 +1,24 @@
+{% load staticfiles %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static "exampleApp/css/exampleApp.dist.css" %}">
+    <script src="{% static "exampleApp/js/exampleApp.dist.js" %}"></script>
+{% endblock extra_head %}
+
+{% block main_content %}
+  <div ng-app="ToDoApp">
+    <div ng-view></div>
+  </div>
+
+{% endblock main_content %}
+
+{% block extra_javascript %}
+
+  <script>
+    // Bootstrap Django data for angular
+    window.jsBootstrap = {};
+    window.jsBootstrap.todoListUrl = "{% url "home:todos_list" %}";
+    window.jsBootstrap.todoUpdateUrl = "{% url "home:todos_update" pk=0 %}";
+    window.jsBootstrap.staticUrl = "{% static "" %}";
+  </script>
+{% endblock %}

@@ -26,7 +26,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'rest_framework',
     'django_extensions',
-    'django_nose',
+    # 'django_nose', uncomment when Django 1.7 release
     'home',
 )
 
@@ -60,4 +60,5 @@ USE_L10N = False
 
 USE_TZ = True
 
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+# Uncomment when new release is made
+# TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
