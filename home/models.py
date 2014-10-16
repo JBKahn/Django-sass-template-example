@@ -6,5 +6,5 @@ class TestModel(models.Model):
 
 
 class Todo(models.Model):
-	item = models.CharField(max_length=255)
-	is_done = models.BooleanField(default=False)
+    item = models.CharField(max_length=255)
+    is_done = models.BooleanField(default=False)

@@ -1,40 +1,39 @@
-
-  <div class="navbar navbar-inverse" role="navigation">
+<div class="navbar navbar-inverse" role="navigation">
     <div class="container">
-      <a class="navbar-brand" href="#">ng-todo</a>
-      <a class="navbar-right navbar-img" href="#"><img src="/static/img/AngularJS.png" alt=""></a>
+        <a class="navbar-brand" href="#">ng-todo</a>
+        <a class="navbar-right navbar-img" href="#"><img src="/static/img/AngularJS.png" alt=""></a>
     </div>
-  </div>
+</div>
 
-  <section ng-controller="NgTodoController as ctrl"><!-- ctrl -->
+<section ng-controller="NgTodoController as ctrl"><!-- ctrl -->
     <div class="outer-container">
 
-      <div class="add-todo-group input-group input-group-lg">
-        <span class="input-group-addon">
-          <i class="glyphicon glyphicon-list-alt"></i>
-        </span>
-        <input ng-model="ctrl.todoData.newTask" placeholder="Add a new todo here!" class="form-control" type="text"><!-- model  -->
-        <span class="input-group-btn">
-          <button class="btn btn-success" type="button" ng-click="ctrl.addNewTask()"><!-- click  -->
-            <i class="glyphicon glyphicon-plus"></i>
-          </button>
-        </span>
-      </div>
+        <div class="add-todo-group input-group input-group-lg">
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list-alt"></i>
+            </span>
+            <input ng-model="ctrl.todoData.newTask" placeholder="Add a new todo here!" class="form-control" type="text"><!-- model  -->
+            <span class="input-group-btn">
+                <button class="btn btn-success" type="button" ng-click="ctrl.addNewTask()"><!-- click  -->
+                    <i class="glyphicon glyphicon-plus"></i>
+                </button>
+            </span>
+        </div>
 
-      <div class="input-group input-group-lg" ng-repeat="todo in ctrl.todoData.todos"><!-- repeat  -->
-        <span class="input-group-addon">
-          <input ng-model="todo.is_done" type="checkbox"> <!-- model -->
-        </span>
-        <input class="form-control" type="text" ng-model="todo.item" ng-class="{finished: todo.is_done}"><!-- model / class  -->
-        <span class="input-group-btn">
-          <button class="btn btn-danger" type="button" ng-click="ctrl.removeTodo($index, todo.id)"><!-- click  -->
-            <i class="glyphicon glyphicon-remove"></i>
-          </button>
-        </span>
-      </div>
+        <div class="input-group input-group-lg" ng-repeat="todo in ctrl.todoData.todos"><!-- repeat  -->
+            <span class="input-group-addon">
+                <input ng-model="todo.is_done" type="checkbox"> <!-- model -->
+            </span>
+            <input class="form-control" type="text" ng-model="todo.item" ng-class="{finished: todo.is_done}"><!-- model / class  -->
+            <span class="input-group-btn">
+                <button class="btn btn-danger" type="button" ng-click="ctrl.removeTodo($index, todo.id)"><!-- click  -->
+                    <i class="glyphicon glyphicon-remove"></i>
+                </button>
+            </span>
+        </div>
 
-      <div class="btn-clear-group">
-        <button class="btn btn-primary btn-clear" ng-click="ctrl.clearCompleted()">Clear Completed</button><!-- click -->
-      </div>
+        <div class="btn-clear-group">
+            <button class="btn btn-primary btn-clear" ng-click="ctrl.clearCompleted()">Clear Completed</button><!-- click -->
+        </div>
     </div>
-  </section>
+</section>

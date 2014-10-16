@@ -26576,46 +26576,45 @@ angular.module('templates', []).run(['$templateCache', function($templateCache) 
   'use strict';
 
   $templateCache.put('templates/todoApp.html',
-    "\n" +
-    "  <div class=\"navbar navbar-inverse\" role=\"navigation\">\n" +
+    "<div class=\"navbar navbar-inverse\" role=\"navigation\">\n" +
     "    <div class=\"container\">\n" +
-    "      <a class=\"navbar-brand\" href=\"#\">ng-todo</a>\n" +
-    "      <a class=\"navbar-right navbar-img\" href=\"#\"><img src=\"/static/img/AngularJS.png\" alt=\"\"></a>\n" +
+    "        <a class=\"navbar-brand\" href=\"#\">ng-todo</a>\n" +
+    "        <a class=\"navbar-right navbar-img\" href=\"#\"><img src=\"/static/img/AngularJS.png\" alt=\"\"></a>\n" +
     "    </div>\n" +
-    "  </div>\n" +
+    "</div>\n" +
     "\n" +
-    "  <section ng-controller=\"NgTodoController as ctrl\"><!-- ctrl -->\n" +
+    "<section ng-controller=\"NgTodoController as ctrl\"><!-- ctrl -->\n" +
     "    <div class=\"outer-container\">\n" +
     "\n" +
-    "      <div class=\"add-todo-group input-group input-group-lg\">\n" +
-    "        <span class=\"input-group-addon\">\n" +
-    "          <i class=\"glyphicon glyphicon-list-alt\"></i>\n" +
-    "        </span>\n" +
-    "        <input ng-model=\"ctrl.todoData.newTask\" placeholder=\"Add a new todo here!\" class=\"form-control\" type=\"text\"><!-- model  -->\n" +
-    "        <span class=\"input-group-btn\">\n" +
-    "          <button class=\"btn btn-success\" type=\"button\" ng-click=\"ctrl.addNewTask()\"><!-- click  -->\n" +
-    "            <i class=\"glyphicon glyphicon-plus\"></i>\n" +
-    "          </button>\n" +
-    "        </span>\n" +
-    "      </div>\n" +
+    "        <div class=\"add-todo-group input-group input-group-lg\">\n" +
+    "            <span class=\"input-group-addon\">\n" +
+    "                <i class=\"glyphicon glyphicon-list-alt\"></i>\n" +
+    "            </span>\n" +
+    "            <input ng-model=\"ctrl.todoData.newTask\" placeholder=\"Add a new todo here!\" class=\"form-control\" type=\"text\"><!-- model  -->\n" +
+    "            <span class=\"input-group-btn\">\n" +
+    "                <button class=\"btn btn-success\" type=\"button\" ng-click=\"ctrl.addNewTask()\"><!-- click  -->\n" +
+    "                    <i class=\"glyphicon glyphicon-plus\"></i>\n" +
+    "                </button>\n" +
+    "            </span>\n" +
+    "        </div>\n" +
     "\n" +
-    "      <div class=\"input-group input-group-lg\" ng-repeat=\"todo in ctrl.todoData.todos\"><!-- repeat  -->\n" +
-    "        <span class=\"input-group-addon\">\n" +
-    "          <input ng-model=\"todo.is_done\" type=\"checkbox\"> <!-- model -->\n" +
-    "        </span>\n" +
-    "        <input class=\"form-control\" type=\"text\" ng-model=\"todo.item\" ng-class=\"{finished: todo.is_done}\"><!-- model / class  -->\n" +
-    "        <span class=\"input-group-btn\">\n" +
-    "          <button class=\"btn btn-danger\" type=\"button\" ng-click=\"ctrl.removeTodo($index, todo.id)\"><!-- click  -->\n" +
-    "            <i class=\"glyphicon glyphicon-remove\"></i>\n" +
-    "          </button>\n" +
-    "        </span>\n" +
-    "      </div>\n" +
+    "        <div class=\"input-group input-group-lg\" ng-repeat=\"todo in ctrl.todoData.todos\"><!-- repeat  -->\n" +
+    "            <span class=\"input-group-addon\">\n" +
+    "                <input ng-model=\"todo.is_done\" type=\"checkbox\"> <!-- model -->\n" +
+    "            </span>\n" +
+    "            <input class=\"form-control\" type=\"text\" ng-model=\"todo.item\" ng-class=\"{finished: todo.is_done}\"><!-- model / class  -->\n" +
+    "            <span class=\"input-group-btn\">\n" +
+    "                <button class=\"btn btn-danger\" type=\"button\" ng-click=\"ctrl.removeTodo($index, todo.id)\"><!-- click  -->\n" +
+    "                    <i class=\"glyphicon glyphicon-remove\"></i>\n" +
+    "                </button>\n" +
+    "            </span>\n" +
+    "        </div>\n" +
     "\n" +
-    "      <div class=\"btn-clear-group\">\n" +
-    "        <button class=\"btn btn-primary btn-clear\" ng-click=\"ctrl.clearCompleted()\">Clear Completed</button><!-- click -->\n" +
-    "      </div>\n" +
+    "        <div class=\"btn-clear-group\">\n" +
+    "            <button class=\"btn btn-primary btn-clear\" ng-click=\"ctrl.clearCompleted()\">Clear Completed</button><!-- click -->\n" +
+    "        </div>\n" +
     "    </div>\n" +
-    "  </section>\n"
+    "</section>\n"
   );
 
 }]);
@@ -26623,35 +26622,35 @@ angular.module('templates', []).run(['$templateCache', function($templateCache) 
 Error.stackTraceLimit = Infinity;
 
 angular.module("ToDoApp", [
-	"ngRoute",
+    "ngRoute",
     "templates",
     "todo.controllers.todo",
     "todo.service.todo",
-    'todo.constants'
+    "todo.constants"
 ])
-.config(['$httpProvider', '$routeProvider', function($httpProvider, $routeProvider) {
-    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
-    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+.config(["$httpProvider", "$routeProvider", function($httpProvider, $routeProvider) {
+    $httpProvider.defaults.xsrfCookieName = "csrftoken";
+    $httpProvider.defaults.xsrfHeaderName = "X-CSRFToken";
 
     var routeConfig = {
-        controller: 'NgTodoController',
-        templateUrl: 'templates/todoApp.html'
+        controller: "NgTodoController",
+        templateUrl: "templates/todoApp.html"
     };
 
     $routeProvider
-    .when('/', routeConfig)
+    .when("/", routeConfig)
     .otherwise({
-        redirectTo: '/'
+        redirectTo: "/"
     });
 }]);
 
-angular.module('todo.constants', [])
-.factory('Constants', ['$window', function($window) {
+angular.module("todo.constants", [])
+.factory("Constants", ["$window", function($window) {
     var jsBootstrap = $window.jsBootstrap || {};
     var constants = {
-        todoListUrl: jsBootstrap.todoListUrl || '',
-        todoUpdateUrl: jsBootstrap.todoUpdateUrl || '',
-        staticUrl: jsBootstrap.staticUrl || '',
+        todoListUrl: jsBootstrap.todoListUrl || "",
+        todoUpdateUrl: jsBootstrap.todoUpdateUrl || "",
+        staticUrl: jsBootstrap.staticUrl || ""
     };
 
     return {
@@ -26660,9 +26659,9 @@ angular.module('todo.constants', [])
         }
     };
 }]);
-angular.module('todo.service.todo', [])
-.factory('TodoService', ['$q', '$http', '$window', function($q, $http, $window) {
-    debugger;
+
+angular.module("todo.service.todo", [])
+.factory("TodoService", ["$q", "$http", "$window", function($q, $http, $window) {
     return {
         getTodos: function(){
             var url = $window.jsBootstrap.todoListUrl;
@@ -26670,7 +26669,7 @@ angular.module('todo.service.todo', [])
 
             var defer = $q.defer();
 
-            $http({method: 'GET', url: url, data: params})
+            $http({method: "GET", url: url, data: params})
             .success(function(result){
                 defer.resolve(result);
             })
@@ -26689,7 +26688,7 @@ angular.module('todo.service.todo', [])
 
             var defer = $q.defer();
 
-            $http({method: 'POST', url: url, data: params})
+            $http({method: "POST", url: url, data: params})
             .success(function(result){
                 defer.resolve(result);
             })
@@ -26709,7 +26708,7 @@ angular.module('todo.service.todo', [])
 
             var defer = $q.defer();
 
-            $http({method: 'PUT', url: url, data: params})
+            $http({method: "PUT", url: url, data: params})
             .success(function(result){
                 defer.resolve(result);
             })
@@ -26727,7 +26726,7 @@ angular.module('todo.service.todo', [])
 
             var defer = $q.defer();
 
-            $http({method: 'DELETE', url: url, data: params})
+            $http({method: "DELETE", url: url, data: params})
             .success(function(result){
                 defer.resolve(result);
             })
@@ -26736,9 +26735,10 @@ angular.module('todo.service.todo', [])
             });
 
             return defer.promise;
-        },
+        }
     };
 }]);
+
 var NgTodoController =  function(TodoService) {
     var self = this;
     self.todoData = {

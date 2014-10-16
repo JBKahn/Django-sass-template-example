@@ -1,35 +1,35 @@
 Error.stackTraceLimit = Infinity;
 
 angular.module("ToDoApp", [
-	"ngRoute",
+    "ngRoute",
     "templates",
     "todo.controllers.todo",
     "todo.service.todo",
-    'todo.constants'
+    "todo.constants"
 ])
-.config(['$httpProvider', '$routeProvider', function($httpProvider, $routeProvider) {
-    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
-    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+.config(["$httpProvider", "$routeProvider", function($httpProvider, $routeProvider) {
+    $httpProvider.defaults.xsrfCookieName = "csrftoken";
+    $httpProvider.defaults.xsrfHeaderName = "X-CSRFToken";
 
     var routeConfig = {
-        controller: 'NgTodoController',
-        templateUrl: 'templates/todoApp.html'
+        controller: "NgTodoController",
+        templateUrl: "templates/todoApp.html"
     };
 
     $routeProvider
-    .when('/', routeConfig)
+    .when("/", routeConfig)
     .otherwise({
-        redirectTo: '/'
+        redirectTo: "/"
     });
 }]);
 
-angular.module('todo.constants', [])
-.factory('Constants', ['$window', function($window) {
+angular.module("todo.constants", [])
+.factory("Constants", ["$window", function($window) {
     var jsBootstrap = $window.jsBootstrap || {};
     var constants = {
-        todoListUrl: jsBootstrap.todoListUrl || '',
-        todoUpdateUrl: jsBootstrap.todoUpdateUrl || '',
-        staticUrl: jsBootstrap.staticUrl || '',
+        todoListUrl: jsBootstrap.todoListUrl || "",
+        todoUpdateUrl: jsBootstrap.todoUpdateUrl || "",
+        staticUrl: jsBootstrap.staticUrl || ""
     };
 
     return {

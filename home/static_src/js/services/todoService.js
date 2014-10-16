@@ -1,6 +1,5 @@
-angular.module('todo.service.todo', [])
-.factory('TodoService', ['$q', '$http', '$window', function($q, $http, $window) {
-    debugger;
+angular.module("todo.service.todo", [])
+.factory("TodoService", ["$q", "$http", "$window", function($q, $http, $window) {
     return {
         getTodos: function(){
             var url = $window.jsBootstrap.todoListUrl;
@@ -8,7 +7,7 @@ angular.module('todo.service.todo', [])
 
             var defer = $q.defer();
 
-            $http({method: 'GET', url: url, data: params})
+            $http({method: "GET", url: url, data: params})
             .success(function(result){
                 defer.resolve(result);
             })
@@ -27,7 +26,7 @@ angular.module('todo.service.todo', [])
 
             var defer = $q.defer();
 
-            $http({method: 'POST', url: url, data: params})
+            $http({method: "POST", url: url, data: params})
             .success(function(result){
                 defer.resolve(result);
             })
@@ -47,7 +46,7 @@ angular.module('todo.service.todo', [])
 
             var defer = $q.defer();
 
-            $http({method: 'PUT', url: url, data: params})
+            $http({method: "PUT", url: url, data: params})
             .success(function(result){
                 defer.resolve(result);
             })
@@ -65,7 +64,7 @@ angular.module('todo.service.todo', [])
 
             var defer = $q.defer();
 
-            $http({method: 'DELETE', url: url, data: params})
+            $http({method: "DELETE", url: url, data: params})
             .success(function(result){
                 defer.resolve(result);
             })
@@ -74,6 +73,6 @@ angular.module('todo.service.todo', [])
             });
 
             return defer.promise;
-        },
+        }
     };
 }]);

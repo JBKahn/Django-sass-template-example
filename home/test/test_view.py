@@ -26,7 +26,7 @@ class HomeViewTest(TestCase):
 class TodoViewTest(TestCase):
 
     def setUp(self):
-        self.todoOne =Todo.objects.create(item='testFalse', is_done=False)
+        self.todoOne = Todo.objects.create(item='testFalse', is_done=False)
         self.todoTwo = Todo.objects.create(item='testTrue', is_done=True)
         self.get_url = reverse('home:todos_list')
         self.update_url = reverse('home:todos_update', kwargs={"pk": 1})
@@ -36,7 +36,13 @@ class TodoViewTest(TestCase):
             self.get_url,
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertItemsEqual(response.data, [{"item": u"testFalse", "is_done": False, "id": self.todoOne.id}, {"item": u"testTrue", "is_done": True, "id": self.todoTwo.id}])
+        self.assertItemsEqual(
+            response.data,
+            [
+                {"item": u"testFalse", "is_done": False, "id": self.todoOne.id},
+                {"item": u"testTrue", "is_done": True, "id": self.todoTwo.id}
+            ]
+        )
         self.assertEqual(len(response.data), 2)
 
     def test_add_todo(self):
@@ -53,7 +59,14 @@ class TodoViewTest(TestCase):
             self.get_url,
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertItemsEqual(response.data, [{"item": u"testFalse", "is_done": False, "id": self.todoOne.id}, {"item": u"testTrue", "is_done": True, "id": self.todoTwo.id}, {"item": u"My favorite todo", "is_done": False, "id": todoThreeId}])
+        self.assertItemsEqual(
+            response.data,
+            [
+                {"item": u"testFalse", "is_done": False, "id": self.todoOne.id},
+                {"item": u"testTrue", "is_done": True, "id": self.todoTwo.id},
+                {"item": u"My favorite todo", "is_done": False, "id": todoThreeId}
+            ]
+        )
         self.assertEqual(len(response.data), 3)
 
     def test_update_todo(self):
@@ -71,7 +84,13 @@ class TodoViewTest(TestCase):
             self.get_url,
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertItemsEqual(response.data, [{"item": u"testFalse is now True", "is_done": True, "id": self.todoOne.id}, {"item": u"testTrue", "is_done": True, "id": self.todoTwo.id}])
+        self.assertItemsEqual(
+            response.data,
+            [
+                {"item": u"testFalse is now True", "is_done": True, "id": self.todoOne.id},
+                {"item": u"testTrue", "is_done": True, "id": self.todoTwo.id}
+            ]
+        )
         self.assertEqual(len(response.data), 2)
 
     def test_delete_todo(self):
