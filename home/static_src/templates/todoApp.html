@@ -22,9 +22,9 @@
 
         <div class="input-group input-group-lg" ng-repeat="todo in ctrl.todoData.todos"><!-- repeat  -->
             <span class="input-group-addon">
-                <input ng-model="todo.is_done" type="checkbox"> <!-- model -->
+                <input ng-model="todo.is_done" ng-click="ctrl.updateTodoItem(todo)" type="checkbox"> <!-- model -->
             </span>
-            <input class="form-control" type="text" ng-model="todo.item" ng-class="{finished: todo.is_done}"><!-- model / class  -->
+            <input class="form-control" type="text" ng-model="todo.item" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }" ng-change="ctrl.updateTodoItem(todo)" ng-class="{finished: todo.is_done}"><!-- model / class  -->
             <span class="input-group-btn">
                 <button class="btn btn-danger" type="button" ng-click="ctrl.removeTodo($index, todo.id)"><!-- click  -->
                     <i class="glyphicon glyphicon-remove"></i>

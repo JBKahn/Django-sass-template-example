@@ -26600,9 +26600,9 @@ angular.module('templates', []).run(['$templateCache', function($templateCache) 
     "\n" +
     "        <div class=\"input-group input-group-lg\" ng-repeat=\"todo in ctrl.todoData.todos\"><!-- repeat  -->\n" +
     "            <span class=\"input-group-addon\">\n" +
-    "                <input ng-model=\"todo.is_done\" type=\"checkbox\"> <!-- model -->\n" +
+    "                <input ng-model=\"todo.is_done\" ng-click=\"ctrl.updateTodoItem(todo)\" type=\"checkbox\"> <!-- model -->\n" +
     "            </span>\n" +
-    "            <input class=\"form-control\" type=\"text\" ng-model=\"todo.item\" ng-class=\"{finished: todo.is_done}\"><!-- model / class  -->\n" +
+    "            <input class=\"form-control\" type=\"text\" ng-model=\"todo.item\" ng-model-options=\"{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }\" ng-change=\"ctrl.updateTodoItem(todo)\" ng-class=\"{finished: todo.is_done}\"><!-- model / class  -->\n" +
     "            <span class=\"input-group-btn\">\n" +
     "                <button class=\"btn btn-danger\" type=\"button\" ng-click=\"ctrl.removeTodo($index, todo.id)\"><!-- click  -->\n" +
     "                    <i class=\"glyphicon glyphicon-remove\"></i>\n" +
@@ -26699,7 +26699,7 @@ angular.module("todo.service.todo", [])
             return defer.promise;
         },
         updateTodo: function(id, todoText, status){
-            var url = $window.jsBootstrap.todoUpdateUrl;
+            var url = $window.jsBootstrap.todoUpdateUrl.replace(/\/0\//, "/" + id + "/");
             var params = {
                 id: id,
                 item: todoText,
@@ -26778,6 +26778,10 @@ var NgTodoController =  function(TodoService) {
             .then(function(data) {
                 self.todoData.todos.splice(index, 1);
             })
+    };
+
+    this.updateTodoItem = function(todo) {
+        TodoService.updateTodo(todo.id, todo.item, todo.is_done);
     };
 };
 angular.module("todo.controllers.todo", [])

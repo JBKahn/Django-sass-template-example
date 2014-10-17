@@ -38,6 +38,10 @@ var NgTodoController =  function(TodoService) {
                 self.todoData.todos.splice(index, 1);
             })
     };
+
+    this.updateTodoItem = function(todo) {
+        TodoService.updateTodo(todo.id, todo.item, todo.is_done);
+    };
 };
 angular.module("todo.controllers.todo", [])
 .controller("NgTodoController", ["TodoService", NgTodoController]);

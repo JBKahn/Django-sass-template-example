@@ -37,7 +37,7 @@ angular.module("todo.service.todo", [])
             return defer.promise;
         },
         updateTodo: function(id, todoText, status){
-            var url = $window.jsBootstrap.todoUpdateUrl;
+            var url = $window.jsBootstrap.todoUpdateUrl.replace(/\/0\//, "/" + id + "/");
             var params = {
                 id: id,
                 item: todoText,
