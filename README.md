@@ -11,37 +11,41 @@ Setup
 
 3. Install [NodeJs](http://nodejs.org/)
 4. Checkout this project and change into the directory.
-5. Install first set of dependencies
+5. Change into the home directory to install the frontend dependencies.
+
+    `cd home`
+
+6. Install first set of dependencies
 
     `npm install`
 
-6. Install bower globally.
+7. Install bower globally.
 
     `sudo npm install -g bower`
 
-7. Install second set of dependancies using bower
+8. Install second set of dependancies using bower
 
     `bower install`
 
-8. Install grunt for building frontend files
+9. Install grunt for building frontend files
 
     `sudo npm install -g grunt-cli`
 
-9. Build frontend files
+10. Build frontend files
 
     `grunt`
 
-10. Download python (~2.7) if you don't have it.
-11. Download [pip](https://pip.readthedocs.org/en/latest/installing.html)
-12. Download virtualenv
+11. Download python (~2.7) if you don't have it.
+12. Download [pip](https://pip.readthedocs.org/en/latest/installing.html)
+13. Download virtualenv
 
     `pip install virtualenv`
 
-13. Download virtualenvwrapper
+14. Download virtualenvwrapper
 
     `pip install virtualenvwrapper`
 
-14. Set [required variables](http://virtualenvwrapper.readthedocs.org/en/latest/install.html)
+15. Set [required variables](http://virtualenvwrapper.readthedocs.org/en/latest/install.html)
 
     I have the following in my `$HOME/.bashrc` file:
     ```sh
@@ -50,7 +54,11 @@ Setup
     source /usr/local/bin/virtualenvwrapper.sh
     ```
 
-15. Setup python virtual environment in the project directory (assuming you're inside it), replace the project name with one of your choice.
+16. Change back into the directory root of the application
+
+    `cd ..`
+
+17. Setup python virtual environment in the project directory (assuming you're inside it), replace the project name with one of your choice.
 
     `mkvirtualenv <project-name> -a . -r ./requirements.txt`.
 
@@ -84,7 +92,8 @@ Requirements
 
 Running The Tests
 -----------------
-`nosetests --with-progressive`
+
+`./run_tests.sh`
 
 How to Deploy using Heroku
 ==========================
